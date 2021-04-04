@@ -54,7 +54,7 @@ export default function Signin(props) {
 
     signin(user).then((data) => {
       if (data.error) {
-        setValues({ ...values, error: data.error})
+        setValues({ ...values, error: "error"})
       } else {
         auth.authenticate(data, () => {
           setValues({ ...values, error: '',redirectToReferrer: true})
@@ -69,7 +69,7 @@ export default function Signin(props) {
 
   const {redirectToReferrer} = values
   if (redirectToReferrer) {
-      return (<Redirect to={from}/>)
+      return (<Redirect to={"/"}/>)
   }
   
   return (
@@ -100,7 +100,6 @@ export default function Signin(props) {
           <br/> 
           {
             values.error && (<Typography component="p" color="error">
-              <Icon color="error" className={classes.error}>error</Icon>
               {values.error}
             </Typography>)
           }
