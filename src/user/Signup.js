@@ -12,7 +12,7 @@ import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
-// import {create} from './api-user.js'
+import {create} from './api-user.js'
 import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
@@ -58,20 +58,20 @@ export default function Signup (){
     }else{
     setValues({ ...values, [event.target.type]: event.target.value })
   }}
-  console.log(values)
+  // console.log(values)
   const clickSubmit = () => {
     const user = {
       name: values.name || undefined,
       email: values.email || undefined,
       password: values.password || undefined
     }
-    // create(user).then((data) => {
-    //   if (data.error) {
-    //     setValues({ ...values, error: data.error})
-    //   } else {
-    //     setValues({ ...values, error: '', open: true})
-    //   }
-    // })
+    create(user).then((data) => {
+      if (data.error) {
+        setValues({ ...values, error: Array.isArray(data.error) ? data.error[0] : data.error })
+      } else {
+        setValues({ ...values, error: '', open: true})
+      }
+    })
   }
 
     return (<div>
@@ -112,7 +112,7 @@ export default function Signup (){
           <br/>           
           <br/> {
             values.error && (<Typography component="p" color="error">
-              <Icon color="error" className={classes.error}>error</Icon>
+              
               {values.error}</Typography>)
           }
         </CardContent>
