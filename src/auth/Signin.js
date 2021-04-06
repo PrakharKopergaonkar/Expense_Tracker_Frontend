@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography'
 import Icon from '@material-ui/core/Icon'
 import { makeStyles } from '@material-ui/core/styles'
 import auth from './auth-helper'
-import {Redirect} from 'react-router-dom'
+import {Redirect, useHistory} from 'react-router-dom'
 import {signin} from './api-auth.js'
 
 const useStyles = makeStyles(theme => ({
@@ -39,6 +39,8 @@ const useStyles = makeStyles(theme => ({
 
 export default function Signin(props) {
   const classes = useStyles()
+  const history = useHistory();
+
   const [values, setValues] = useState({
       email: '',
       password: '',
@@ -58,18 +60,14 @@ export default function Signin(props) {
       } else {
         auth.authenticate(data, () => {
           setValues({ ...values, error: '',redirectToReferrer: true})
+          history.push("/home")
         })
-      }
+      } 
     })
   }
 
   const handleChange = event => {
     setValues({ ...values, [event.target.type]: event.target.value })
-  }
-
-  const {redirectToReferrer} = values
-  if (redirectToReferrer) {
-      return (<Redirect to={"/"}/>)
   }
   
   return (
