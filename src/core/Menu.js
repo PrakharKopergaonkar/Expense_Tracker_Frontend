@@ -33,27 +33,43 @@ const Menu = withRouter(({history}) => (
             <HomeIcon/>
           </IconButton>
         </Link>
-
-        <div style={{position:'absolute',top:"5px", right: '10px'}}>
-            <span style={{"float": 'right'}}>
-                {/* { 
-                    !auth.isAuthenticated() && (
-                */}        
-                <span>
-                    <Link to="/signup">
-                        <Button style={isActive(history, "/signup")}>Sign up
-                        </Button>
-                    </Link>
-                    <Link to="/signin">
-                        <Button style={isActive(history, "/signin")}>Sign In
-                        </Button>
-                    </Link>
-                    </span>
-                    {/* )
-                } */}
-            </span>
-        </div>
-      </div> 
+        {
+          auth.isAuthenticated() && (<span>
+            <Link to={"/expenses/all"}>
+              <Button style={isActive(history, "/expenses/all")}>Expenses</Button>
+            </Link>
+            <Link to={"/expenses/reports"}>
+              <Button style={isActive(history, "/expenses/reports")}>Reports</Button>
+            </Link>
+          </span>)
+        }
+      </div>
+      <div style={{'position':'absolute', 'right': '10px'}}><span style={{'float': 'right'}}>
+      {
+        !auth.isAuthenticated() && (<span>
+          <Link to="/signup">
+            <Button style={isActive(history, "/signup")}>Sign up
+            </Button>
+          </Link>
+          <Link to="/signin">
+            <Button style={isActive(history, "/signin")}>Sign In
+            </Button>
+          </Link>
+        </span>)
+      }
+      {
+        auth.isAuthenticated() && (
+        <span>
+          <Link to="/expenses/new"><Button style={isButtonActive(history, "/expenses/new")}><AddIcon style={{marginRight: 4}}/> Add Expense</Button></Link>  
+          {/* <Link to={"/user/" + auth.isAuthenticated().user._id}>
+            <Button style={isActive(history, "/user/" + auth.isAuthenticated().user._id)}>My Profile</Button>
+          </Link> */}
+          <Button color="inherit" onClick={() => {
+              auth.clearJWT(() => history.push('/'))
+            }}>Sign out</Button>
+        </span>)
+      }
+      </span></div>
     </Toolbar>
   </AppBar>
 ))
