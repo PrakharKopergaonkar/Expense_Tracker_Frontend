@@ -18,6 +18,7 @@ const MainRouter = () => {
         <Route path="/expense" component={ExpenseOverview}/>
         {/* <Route path="/temp" component={Temp}/> */}
         <PrivateRoute path="/expenses/new" component={NewExpense}/>
+        <PrivateRoute path="/expenses/all" component={Expenses}/>
       </Switch>
     </div>)
 }
