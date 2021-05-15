@@ -195,12 +195,13 @@ export default function Expenses() {
           <Divider/>
           <ExpansionPanelDetails style={{display: 'block'}}>
           <div>
-              <TextField label="Title" className={classes.textField} value={expense.title} onChange={handleChange('title', index)} margin="normal"/>
-             <TextField label="Amount ($)" className={classes.textField} value={expense.amount} onChange={handleChange('amount', index)} margin="normal" type="number"/>
+              <TextField disabled={true} label="Title" className={classes.textField} value={expense.title} onChange={handleChange('title', index)} margin="normal"/>
+             <TextField  disabled={true} label="Amount ($)" className={classes.textField} value={expense.amount} onChange={handleChange('amount', index)} margin="normal" type="number"/>
           </div>
           <div>
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <DateTimePicker
+                    disabled={true}
                     label="Incurred on"
                     className={classes.textField}
                     views={["year", "month", "date"]}
@@ -209,7 +210,7 @@ export default function Expenses() {
                     showTodayButton
                 />
           </MuiPickersUtilsProvider>
-          <TextField label="Category" className={classes.textField} value={expense.category} onChange={handleChange('category', index)} margin="normal"/>
+          <TextField disabled={true} label="Category" className={classes.textField} value={expense.category} onChange={handleChange('category', index)} margin="normal"/>
           </div>
           <TextField
             label="Notes"
